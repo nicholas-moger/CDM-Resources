@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataDocument>
+    <trade>
+        <header>
+            <tradeId>TRADE-BUY-001</tradeId>
+            <tradeDate>2025-06-21</tradeDate>
+            <status>ACTIVE</status>
+        </header>
+        <economics>
+            <direction>BUY</direction>
+            <quantity>1000</quantity>
+            <price>105.50</price>
+            <currency>USD</currency>
+            <notional>105500.00</notional>
+        </economics>
+        <parties>
+            <buyer>ABC Investment Fund</buyer>
+            <seller>XYZ Trading Corp</seller>
+            <broker>Prime Brokerage LLC</broker>
+        </parties>
+    </trade>
+</dataDocument>

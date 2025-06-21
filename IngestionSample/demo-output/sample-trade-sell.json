@@ -1,0 +1,30 @@
+{
+  "trade" : {
+    "tradeHeader" : {
+      "tradeId" : "TRADE-SELL-002",
+      "tradeDate" : {
+        "day" : 21,
+        "month" : 6,
+        "year" : 2025
+      },
+      "tradeStatus" : "SETTLED",
+      "type" : "demo.trade.model.TradeHeader"
+    },
+    "tradeEconomics" : {
+      "direction" : "SELL",
+      "quantity" : 500,
+      "price" : 98.75,
+      "currency" : "EUR",
+      "notional" : null,
+      "type" : "demo.trade.model.TradeEconomics"
+    },
+    "parties" : {
+      "buyer" : "DEF Pension Fund",
+      "seller" : "GHI Asset Management",
+      "broker" : null,
+      "type" : "demo.trade.model.TradeParties"
+    },
+    "type" : "demo.trade.model.Trade"
+  },
+  "type" : "demo.trade.model.TradeRoot"
+}

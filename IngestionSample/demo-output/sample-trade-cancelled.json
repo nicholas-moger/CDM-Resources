@@ -1,0 +1,30 @@
+{
+  "trade" : {
+    "tradeHeader" : {
+      "tradeId" : "TRADE-CANCEL-003",
+      "tradeDate" : {
+        "day" : 20,
+        "month" : 6,
+        "year" : 2025
+      },
+      "tradeStatus" : "CANCELLED",
+      "type" : "demo.trade.model.TradeHeader"
+    },
+    "tradeEconomics" : {
+      "direction" : "BUY",
+      "quantity" : 750,
+      "price" : 102.25,
+      "currency" : "GBP",
+      "notional" : 76687.50,
+      "type" : "demo.trade.model.TradeEconomics"
+    },
+    "parties" : {
+      "buyer" : "JKL Hedge Fund",
+      "seller" : "MNO Securities",
+      "broker" : "PQR Prime Services",
+      "type" : "demo.trade.model.TradeParties"
+    },
+    "type" : "demo.trade.model.Trade"
+  },
+  "type" : "demo.trade.model.TradeRoot"
+}

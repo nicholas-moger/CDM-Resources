@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataDocument>
+    <trade>
+        <header>
+            <tradeId>TRADE-CANCEL-003</tradeId>
+            <tradeDate>2025-06-20</tradeDate>
+            <status>CANCELLED</status>
+        </header>
+        <economics>
+            <direction>BUY</direction>
+            <quantity>750</quantity>
+            <price>102.25</price>
+            <currency>GBP</currency>
+            <notional>76687.50</notional>
+        </economics>
+        <parties>
+            <buyer>JKL Hedge Fund</buyer>
+            <seller>MNO Securities</seller>
+            <broker>PQR Prime Services</broker>
+        </parties>
+    </trade>
+</dataDocument>

@@ -1,0 +1,59 @@
+namespace demo.trade.functions
+version "${project.version}"
+
+import demo.trade.model.*
+
+func CalculateTradeNotional: <"Calculate notional value if not provided">
+    inputs:
+        trade Trade (1..1)
+    output:
+        notional number (1..1)
+    
+    set notional:
+        if trade -> tradeEconomics -> notional exists
+        then trade -> tradeEconomics -> notional
+        else trade -> tradeEconomics -> quantity * trade -> tradeEconomics -> price
+
+func ValidateTrade: <"Validate trade completeness">
+    inputs:
+        trade Trade (1..1)
+    output:
+        isValid boolean (1..1)
+    
+    set isValid:
+        trade -> tradeHeader -> tradeId exists
+        and trade -> tradeEconomics -> quantity > 0
+        and trade -> tradeEconomics -> price > 0
+        and trade -> parties -> buyer exists
+        and trade -> parties -> seller exists
+
+func GetTradeDescription: <"Generate human readable trade description">
+    inputs:
+        trade Trade (1..1)
+    output:
+        description string (1..1)
+    
+    set description:
+        trade -> tradeHeader -> tradeId 
+        + ": " 
+        + (if trade -> tradeEconomics -> direction = BuySellEnum -> Buy then "BUY" else "SELL")
+        + " " 
+        + trade -> tradeEconomics -> quantity to-string
+        + " @ " 
+        + trade -> tradeEconomics -> price to-string
+        + " " 
+        + trade -> tradeEconomics -> currency
+        + " (Status: " 
+        + (if trade -> tradeHeader -> tradeStatus = TradeStatusEnum -> Active then "ACTIVE" 
+           else if trade -> tradeHeader -> tradeStatus = TradeStatusEnum -> Cancelled then "CANCELLED"
+           else "SETTLED")
+        + ")"
+
+func IsActiveTrade: <"Check if trade is in active status">
+    inputs:
+        trade Trade (1..1)
+    output:
+        isActive boolean (1..1)
+    
+    set isActive:
+        trade -> tradeHeader -> tradeStatus = TradeStatusEnum -> Active

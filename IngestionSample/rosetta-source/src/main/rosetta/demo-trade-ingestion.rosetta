@@ -1,0 +1,120 @@
+namespace demo.trade.model
+version "${project.version}"
+
+/*
+Simple Trade Model for Ingestion Demo
+*/
+
+type TradeRoot:
+    [rootType]
+    trade Trade (1..1)
+        [synonym TRADE_XML_SOURCE value "trade"]
+
+type Trade:
+    tradeHeader TradeHeader (1..1)
+        [synonym TRADE_XML_SOURCE value "header"]
+    tradeEconomics TradeEconomics (1..1)
+        [synonym TRADE_XML_SOURCE value "economics"]
+    parties TradeParties (1..1)
+        [synonym TRADE_XML_SOURCE value "parties"]
+
+type TradeHeader:
+    tradeId string (1..1)
+        [synonym TRADE_XML_SOURCE value "tradeId"]
+    tradeDate date (1..1)
+        [synonym TRADE_XML_SOURCE value "tradeDate" dateFormat "yyyy-MM-dd"]
+    tradeStatus TradeStatusEnum (1..1)
+        [synonym TRADE_XML_SOURCE set to TradeStatusEnum -> Active when "status" = "ACTIVE"]
+        [synonym TRADE_XML_SOURCE set to TradeStatusEnum -> Cancelled when "status" = "CANCELLED"]
+        [synonym TRADE_XML_SOURCE set to TradeStatusEnum -> Settled when "status" = "SETTLED"]
+
+type TradeEconomics:
+    direction BuySellEnum (1..1)
+        [synonym TRADE_XML_SOURCE set to BuySellEnum -> Buy when "direction" = "BUY"]
+        [synonym TRADE_XML_SOURCE set to BuySellEnum -> Sell when "direction" = "SELL"]
+    quantity number (1..1)
+        [synonym TRADE_XML_SOURCE value "quantity"]
+    price number (1..1)
+        [synonym TRADE_XML_SOURCE value "price"]
+    currency string (1..1)
+        [synonym TRADE_XML_SOURCE value "currency"]
+    notional number (0..1)
+        [synonym TRADE_XML_SOURCE value "notional" default to 0.0]
+
+type TradeParties:
+    buyer string (1..1)
+        [synonym TRADE_XML_SOURCE value "buyer"]
+    seller string (1..1)
+        [synonym TRADE_XML_SOURCE value "seller"]
+    broker string (0..1)
+        [synonym TRADE_XML_SOURCE value "broker" default to "Direct"]
+
+enum BuySellEnum: <"Buy or sell enumeration">
+    Buy <"Buy side">
+    Sell <"Sell side">
+
+enum TradeStatusEnum: <"Trade status enumeration">
+    Active <"Active trade">
+    Cancelled <"Cancelled trade">
+    Settled <"Settled trade">
+
+/*
+XML Schema:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="dataDocument">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="trade">
+                    <xs:complexType>
+                        <xs:all>
+                            <xs:element name="header">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="tradeId" type="xs:string"/>
+                                        <xs:element name="tradeDate" type="xs:string"/>
+                                        <xs:element name="status" type="xs:string"/>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="economics">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="direction" type="xs:string"/>
+                                        <xs:element name="quantity" type="xs:decimal"/>
+                                        <xs:element name="price" type="xs:decimal"/>
+                                        <xs:element name="currency" type="xs:string"/>
+                                        <xs:element name="notional" type="xs:decimal" minOccurs="0"/>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="parties">
+                                <xs:complexType>
+                                    <xs:all>
+                                        <xs:element name="buyer" type="xs:string"/>
+                                        <xs:element name="seller" type="xs:string"/>
+                                        <xs:element name="broker" type="xs:string" minOccurs="0"/>
+                                    </xs:all>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:all>
+                    </xs:complexType>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+*/
+
+synonym source TRADE_XML_SOURCE
+
+// Ingestion function to convert XML to TradeRoot
+func IngestTradeXML:
+    [ingest XML]
+    inputs:
+        xmlDocument string (1..1)
+    output:
+        tradeRoot TradeRoot (0..1)
+    
+    // The mapping is handled automatically via the synonym annotations above

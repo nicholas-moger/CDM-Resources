@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataDocument>
+    <trade>
+        <header>
+            <tradeId>TRADE-SELL-002</tradeId>
+            <tradeDate>2025-06-21</tradeDate>
+            <status>SETTLED</status>
+        </header>
+        <economics>
+            <direction>SELL</direction>
+            <quantity>500</quantity>
+            <price>98.75</price>
+            <currency>EUR</currency>
+            <!-- notional not provided - should default to 0.0 -->
+        </economics>
+        <parties>
+            <buyer>DEF Pension Fund</buyer>
+            <seller>GHI Asset Management</seller>
+            <!-- broker not provided - should default to "Direct" -->
+        </parties>
+    </trade>
+</dataDocument>

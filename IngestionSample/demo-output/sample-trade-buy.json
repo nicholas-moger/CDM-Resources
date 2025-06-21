@@ -1,0 +1,30 @@
+{
+  "trade" : {
+    "tradeHeader" : {
+      "tradeId" : "TRADE-BUY-001",
+      "tradeDate" : {
+        "day" : 21,
+        "month" : 6,
+        "year" : 2025
+      },
+      "tradeStatus" : "ACTIVE",
+      "type" : "demo.trade.model.TradeHeader"
+    },
+    "tradeEconomics" : {
+      "direction" : "BUY",
+      "quantity" : 1000,
+      "price" : 105.50,
+      "currency" : "USD",
+      "notional" : 105500.00,
+      "type" : "demo.trade.model.TradeEconomics"
+    },
+    "parties" : {
+      "buyer" : "ABC Investment Fund",
+      "seller" : "XYZ Trading Corp",
+      "broker" : "Prime Brokerage LLC",
+      "type" : "demo.trade.model.TradeParties"
+    },
+    "type" : "demo.trade.model.Trade"
+  },
+  "type" : "demo.trade.model.TradeRoot"
+}
