@@ -19,8 +19,8 @@ Based on the reference build environment, the following tools and versions are r
 - **Environment Variable**: `MAVEN_HOME=C:\Program Files\apache-maven-3.9.9`
 
 ### Node.js
-- **Version**: 22.14.0
-- **Package Manager**: npm 10.9.2
+- **Version**: 22.14.0 or higher (any recent LTS version is acceptable)
+- **Package Manager**: npm (included with Node.js)
 
 ## Manual Installation Steps
 
@@ -55,18 +55,18 @@ Based on the reference build environment, the following tools and versions are r
 
 ### 3. Install Node.js
 
-1. Download Node.js 22.14.0 from: https://nodejs.org/
-2. Download the Windows Installer (.msi) for version 22.14.0
-3. Run the installer and follow the installation wizard
+1. Download Node.js LTS from: https://nodejs.org/
+2. Download the Windows Installer (.msi) - LTS version recommended
+3. Run the installer and follow the installation wizard (no admin rights needed)
 4. Verify installation by opening a new PowerShell window and running:
    ```powershell
    node --version
    npm --version
    ```
 
-## Automated Installation
+## Installation Helper Script
 
-For automated installation, use the provided PowerShell script:
+For guided installation assistance, use the provided PowerShell script:
 
 ```powershell
 .\INSTALL_DRR_PREREQUISITES.ps1
@@ -74,9 +74,13 @@ For automated installation, use the provided PowerShell script:
 
 This script will:
 - Check for existing installations
-- Download and install the required versions of Java, Maven, and Node.js
-- Configure environment variables
-- Verify the installation
+- Open download pages in your browser
+- Provide step-by-step installation instructions
+- Guide you through manual installation process
+- Verify installations after each step
+- Prompt you to restart VS Code between installations
+
+**Note**: This is a helper script that guides manual installation - no admin privileges required.
 
 ## Environment Variables
 
@@ -126,9 +130,10 @@ If environment variables are not set correctly:
 
 ## Notes
 
-- All installations should be done with Administrator privileges
+- Java and Maven installations may require Administrator privileges
+- Node.js installation typically does not require admin privileges
 - Restart your terminal/IDE after installation to ensure environment variables are loaded
-- The automated script requires PowerShell execution policy to allow script execution
+- The helper script does not require PowerShell execution policy changes
 - Internet connection is required for downloading the installation packages
 
 ## Support
